@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Location Detail</title>
+
+        <link rel="stylesheet" href="https://js.arcgis.com/4.25/esri/themes/light/main.css">
+        <script src="https://js.arcgis.com/4.25/"></script>
+
+        <style>
+            #map {
+                height: 500px;
+                width: 100%;
+            }
+            .location-details {
+                margin-top: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Location Detail</h1>
+
+        <div id="map"></div>
+
+        <div class="location-details">
+            <p><strong>Address:</strong> {{ address }}</p>
+            <p><strong>Latitude:</strong> {{ latitude }}</p>
+            <p><strong>Longitude:</strong> {{ longitude }}</p>
+        </div>
+
+        <script>
+            require([
+                "esri/Map",
+                "esri/views/MapView",
+                "esri/Graphic"
+            ], function(Map, MapView, Graphic) {
+                var map = new Map({
+                    basemap: "streets-navigation-vector"
+                });
+
+                var view = new MapView({
+                    container: "map",
+                    map: map,
+                    center: [{{ longitude }}, {{ latitude }}],
+                    zoom: 15
+                });
+
+                var point = {
+                    type: "point",
+                    longitude: {{ longitude }},
+                    latitude: {{ latitude }}
+                };
+
+                var markerSymbol = {
+                    type: "simple-marker",
+                    color: "red",
+                    size: "12px"
+                };
+
+                var pointGraphic = new Graphic({
+                    geometry: point,
+                    symbol: markerSymbol
+                });
+
+                view.graphics.add(pointGraphic);
+            });
+        </script>
+    </body>
+</html>

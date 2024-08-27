@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Misc
+env/
+venv/
+.env
+.venv
+.DS_Store
+
+# Workflow
+.github/
+
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+.docker-compose.yml
+
+# Exclude these files
+README.md
+Makefile
+Pipfile
+Pipfile.lock
+.pre-commit-config.yml
+liara.json
